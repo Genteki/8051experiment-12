@@ -3,27 +3,23 @@ LJMP INIT
 
 ORG 0100H
 INIT:
-    NUM EQU 40H
     N1 EQU 41H
     N2 EQU 42H
     N3 EQU 43H
     N4 EQU 44H
 
-    MOV N1 #1
-    MOV N2 #2
-    MOV N3 #3
-    MOV N4 #4
-
+    MOV N1 ;晶体管1:1
+    MOV N2 ;晶体管2:2
+    MOV N3 ;晶体管3:3
+    MOV N4 ;晶体管4:4
     LJMP MAIN
 
-
 MAIN:
-    LCALL DISPLAY
+    LCALL DISPLAY ; 调用展示子程序
     SJMP $
 
 DISPLAY:
 ; ADDRESS_LIST: 7FF8H,7FF9H,7FFAH,7FFBH
-
     MOV A, N1
     ANL A, #00001111B; 取后四位
     MOV DPTR, #MAPNUM
@@ -55,28 +51,11 @@ DISPLAY:
     MOV DPTR, #7FFBH
     ANL A, #01111111B;
     MOVX @DPTR, A
-
     RET
 
-
-
-
 MAPNUM:
-    DB 0C0H
-    DB 0F9H
-    DB 0A4H
-    DB 0B0H
-    DB 99H
-    DB 92H
-    DB 82H
-    DB 0F8H
-    DB 80H
-    DB 090H
-    DB 88H
-    DB 83H
-    DB 0C6H
-    DB 0A1H
-    DB 86H
-    DB 8EH
-
+    DB 0C0H, 0F9H, 0A4H, 0B0H
+    DB 99H,  92H,  82H,  0F8H
+    DB 80H,  090H, 88H,  83H
+    DB 0C6H, 0A1H, 86H,  8EH
 END

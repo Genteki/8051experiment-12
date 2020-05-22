@@ -88,7 +88,6 @@ DISPLAY:
     MOV DPTR, #7FFBH
     ANL A, #01111111B;
     MOVX @DPTR, A
-
     RET
 
 DELAY10:
@@ -103,22 +102,10 @@ DELAY10:
     RET; 2*T
     ;共计1000T,恰好10ms
 
-MAPNUM:
-    DB 0C0H
-    DB 0F9H
-    DB 0A4H
-    DB 0B0H
-    DB 99H
-    DB 92H
-    DB 82H
-    DB 0F8H
-    DB 80H
-    DB 090H
-    DB 88H
-    DB 83H
-    DB 0C6H
-    DB 0A1H
-    DB 86H
-    DB 8EH
 
+MAPNUM:
+    DB 0C0H, 0F9H, 0A4H, 0B0H
+    DB 99H,  92H,  82H,  0F8H
+    DB 80H,  090H, 88H,  83H
+    DB 0C6H, 0A1H, 86H,  8EH
 END

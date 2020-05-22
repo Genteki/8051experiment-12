@@ -11,7 +11,6 @@ INIT:
     NI EQU 45H
     NADD EQU 46H
 
-
     MOV N1, #1
     MOV N2, #2
     MOV N3, #3
@@ -21,7 +20,6 @@ INIT:
 
     LJMP MAIN
 
-
 MAIN:
     LCALL DISPLAY
     LCALL ADDALL
@@ -30,7 +28,6 @@ MAIN:
 
 DISPLAY:
 ; ADDRESS_LIST: 7FF8H,7FF9H,7FFAH,7FFBH
-
     MOV A, N1
     ANL A, #00001111B; 取后四位
     MOV DPTR, #MAPNUM
@@ -62,7 +59,6 @@ DISPLAY:
     MOV DPTR, #7FFBH
     ANL A, #01111111B;
     MOVX @DPTR, A
-
     RET
 
 ADDALL:
@@ -80,7 +76,6 @@ ADDALL:
 ADDALL_END:
     RET
 
-
 DELAY500:
 ; T = (2XYZ+3YZ+3Z+3)T = 500.4 ms
     DEL4:   MOV R4, #100
@@ -92,21 +87,8 @@ DELAY500:
     RET
 
 MAPNUM:
-    DB 0C0H
-    DB 0F9H
-    DB 0A4H
-    DB 0B0H
-    DB 99H
-    DB 92H
-    DB 82H
-    DB 0F8H
-    DB 80H
-    DB 090H
-    DB 88H
-    DB 83H
-    DB 0C6H
-    DB 0A1H
-    DB 86H
-    DB 8EH
-
+    DB 0C0H, 0F9H, 0A4H, 0B0H
+    DB 99H,  92H,  82H,  0F8H
+    DB 80H,  090H, 88H,  83H
+    DB 0C6H, 0A1H, 86H,  8EH
 END
