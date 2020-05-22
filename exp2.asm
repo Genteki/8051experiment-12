@@ -93,6 +93,7 @@ INT_1:
     PUSH PSW; 程序状态字
     PUSH ACC; 累加器
     JNB P1.0, WAIT_FOR_RESUME;
+TIME_RESET:
     MOV TH1, #3CH; d
     MOV TL1, #0B0H; d
     INC TCOUNT
@@ -123,7 +124,7 @@ WAIT_FOR_RESUME:
     LCALL DELAY
     JNB P1.2, REST
     JB P1.1, WAIT_FOR_RESUME
-    LJMP INT_1_RET
+    LJMP TIME_RESET; 回到时间常数重置，继续完成中断
 ; 触发清零
 REST:
     MOV SEC, #0
@@ -132,7 +133,8 @@ REST:
     MOV LEDM2, #0
     MOV LEDS1, #0
     MOV LEDS2, #0
-    LJMP INT_1_RET
+    LCALL DISPLAY
+    LJMP WAIT_FOR_RESUME; 返回循环等待继续按钮按下
 ; 中断结束
 INT_1_RET:
     POP ACC
